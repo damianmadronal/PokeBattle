@@ -29,20 +29,20 @@ class Pokemon
     {
         echo "<br><strong> $target->name total hp: $target->health</strong> <br><br>";
         if ($target->weaknessName->energyType == $this->energyType->name) {
-            $multipliedDamage = $attack[1] * $this->weaknessName->multiplier;
-            echo "$this->name attacked with $attack[0] - will do $multipliedDamage damage <br>";
+            $damage = $attack[1] * $target->weaknessName->multiplier;
+            echo "$this->name attacked with $attack[0] - will do $damage damage <br>";
         } else {
-            $multipliedDamage = $attack[1];
+            $damage = $attack[1];
             echo "No damage multiplied <br>";
         }
         if ($target->resistance->energyType == $this->energyType->name) {
-            $damage = $multipliedDamage - $target->resistance->value;
-            echo "Attack damage has been reduced to $damage damage <br>";
+            $damage = $damage - $target->resistance->value;
+            echo "Attack has been reduced to $damage damage <br>";
             echo "$this->name will do $damage damage to $target->name <br>";
         } else {
             echo "no resistance stuff <br>";
-            $damage = $multipliedDamage;
-            echo "$this->name will do $multipliedDamage damage to $target->name <br>";
+            $damage = $damage;
+            echo "$this->name will do $damage damage to $target->name <br>";
         }
 
 
@@ -69,50 +69,4 @@ class Pokemon
     //         $this->health = $hp;
     //     }
     // }
-}
-
-class EnergyType
-{
-    public $name;
-
-    public function __construct($name)
-    {
-        $this->name = $name;
-    }
-}
-
-class Attack
-{
-    public $name;
-    public $damage;
-
-    public function __construct($name, $damage)
-    {
-        $this->name = $name;
-        $this->damage = $damage;
-    }
-}
-
-class Weakness
-{
-    public $energyType;
-    public $multiplier;
-
-    public function __construct($energyType, $multiplier)
-    {
-        $this->energyType = $energyType;
-        $this->multiplier = $multiplier;
-    }
-}
-
-class Resistance
-{
-    public $energyType;
-    public $value;
-
-    public function __construct($energyType, $value)
-    {
-        $this->energyType = $energyType;
-        $this->value = $value;
-    }
 }

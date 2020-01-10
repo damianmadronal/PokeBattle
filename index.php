@@ -2,6 +2,10 @@
 <?php
 
 require 'Pokemon.php';
+require 'EnergyType.php';
+require 'Attack.php';
+require 'Resistance.php';
+require 'Weakness.php';
 
 
 $pikachu = new Pokemon('Pikachu', 'Pickachu', 'Lightning', 60, [['Electric Ring', 50], ['Pika Punch', 20]], 'Fire', 1.5, 'Fighting', 20);
