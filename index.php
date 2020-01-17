@@ -13,5 +13,5 @@ $pikachu = new Pokemon('Pikachu', 'Pickachu', 'Lightning', 60, [['Electric Ring'
 $charmeleon = new Pokemon('Charmeleon', 'Chermelon', 'Fire', 60, [['Head Butt', 10], ['Flare', 30]], 'Water', 2, 'Lightning', 10);
 
 
-$pikachu->battleMove($charmeleon, $pikachu->getAttacks(rand(0, 1)));
-$charmeleon->battleMove($pikachu, $charmeleon->getAttacks(rand(0, 1)));
+$pikachu->battleMove($charmeleon, $pikachu->attacks[rand(0, 1)]);
+$charmeleon->battleMove($pikachu, $charmeleon->attacks[rand(0, 1)]);
