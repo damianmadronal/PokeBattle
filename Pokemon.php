@@ -1,17 +1,18 @@
 <?php
 
+
 class Pokemon
 {
-    public $name;
-    public $nickName;
-    public $energyType;
-    public $hitpoints;
-    public $health;
-    public $attacks;
-    public $weaknessName;
-    public $resistance;
-    public $weaknessMultiplier;
-    public $resistanceValue;
+    private $name;
+    private $nickName;
+    private $energyType;
+    private $hitpoints;
+    private $health;
+    private $attacks;
+    private $weaknessName;
+    private $resistance;
+    private $weaknessMultiplier;
+    private $resistanceValue;
 
     public function __construct($name, $nickName, $energyType, $hitpoints, $attacks, $weaknessName, $weaknessMultiplier, $resistance, $resistanceValue)
     {
@@ -29,20 +30,20 @@ class Pokemon
     {
         echo "<br><strong> $target->name total hp: $target->health</strong> <br><br>";
         if ($target->weaknessName->energyType == $this->energyType->name) {
-            $multipliedDamage = $attack[1] * $this->weaknessName->multiplier;
-            echo "$this->name attacked with $attack[0] - will do $multipliedDamage damage <br>";
+            $damage = $attack[1][1] * $target->weaknessName->multiplier;
+            echo "$this->name attacked with " . $attack[1][0] . " - will do $damage damage <br>";
         } else {
-            $multipliedDamage = $attack[1];
-            echo "No damage multiplied <br>";
+            $damage = $attack[1][1];
+            echo "No damage multiplied -  will do $damage damage<br>";
         }
         if ($target->resistance->energyType == $this->energyType->name) {
-            $damage = $multipliedDamage - $target->resistance->value;
-            echo "Attack damage has been reduced to $damage damage <br>";
+            $damage = $damage - $target->resistance->value;
+            echo "Attack has been reduced to $damage damage <br>";
             echo "$this->name will do $damage damage to $target->name <br>";
         } else {
             echo "no resistance stuff <br>";
-            $damage = $multipliedDamage;
-            echo "$this->name will do $multipliedDamage damage to $target->name <br>";
+            $damage = $damage;
+            echo "$this->name will do $damage damage to $target->name <br>";
         }
 
 
@@ -58,61 +59,85 @@ class Pokemon
             echo "$target->name is left with $target->health hp <br>";
         }
     }
-    // public function getHealth()
-    // {
-    //     return $this->health;
-    // }
 
-    // public function setHealth($hp)
-    // {
-    //     if ($hp > 0) {
-    //         $this->health = $hp;
-    //     }
-    // }
-}
-
-class EnergyType
-{
-    public $name;
-
-    public function __construct($name)
+    function setName($name)
     {
         $this->name = $name;
     }
-}
-
-class Attack
-{
-    public $name;
-    public $damage;
-
-    public function __construct($name, $damage)
+    function getName()
     {
-        $this->name = $name;
-        $this->damage = $damage;
+        return $this->name;
     }
-}
-
-class Weakness
-{
-    public $energyType;
-    public $multiplier;
-
-    public function __construct($energyType, $multiplier)
+    function setNickName($nickName)
     {
-        $this->energyType = $energyType;
-        $this->multiplier = $multiplier;
+        $this->nickName = $nickName;
     }
-}
-
-class Resistance
-{
-    public $energyType;
-    public $value;
-
-    public function __construct($energyType, $value)
+    function getNickName()
     {
-        $this->energyType = $energyType;
-        $this->value = $value;
+        return $this->nickName;
+    }
+    function setEnergyType($energyType)
+    {
+        $this->energyType = new EnergyType($energyType);
+    }
+    function getEnergyType()
+    {
+        return $this->energyType;
+    }
+    function setHitpoints($hitpoints)
+    {
+        $this->hitpoints = $hitpoints;
+    }
+    function getHitpoints()
+    {
+        return $this->hitpoints;
+    }
+    function setHealth($health)
+    {
+        $this->health = $health;
+    }
+    function getHealth()
+    {
+        return $this->health;
+    }
+    function setAttacks($attacks)
+    {
+        $this->attacks = $attacks;
+    }
+    function getAttacks()
+    {
+        return $this->attacks;
+    }
+    function setWeaknessName($weaknessName, $weaknessMultiplier)
+    {
+        $this->weaknessName = new Weakness($weaknessName, $weaknessMultiplier);
+    }
+    function getWeaknessName()
+    {
+        return $this->weaknessName;
+    }
+    function setResistance($resistance, $resistanceValue)
+    {
+        $this->resistance = new Resistance($resistance, $resistanceValue);
+    }
+    function getResistance()
+    {
+        return $this->resistance;
+    }
+    function setWeaknessMultiplier($weaknessMultiplier)
+    {
+        $this->weaknessMultiplier = $weaknessMultiplier;
+    }
+    function getWeaknessMultiplier()
+    {
+        return $this->weaknessMultiplier;
+    }
+    function setResistanceValue($resistanceValue)
+    {
+        $this->resistanceValue = $resistanceValue;
+    }
+    function getResistanceValue()
+    {
+        return $this->resistanceValue;
     }
 }
