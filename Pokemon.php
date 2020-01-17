@@ -31,19 +31,15 @@ class Pokemon
         echo "<br><strong> $target->name total hp: $target->health</strong> <br><br>";
         if ($target->weaknessName->energyType == $this->energyType->name) {
             $damage = $attack[1] * $target->weaknessName->multiplier;
-            echo "$this->name attacked with " . $attack[1] . " - will do $damage damage <br>";
+            echo "$this->name used " . $attack[0] . " - It's very effective! ($damage) <br>";
         } else {
             $damage = $attack[1];
-            echo "No damage multiplied -  will do $damage damage<br>";
         }
         if ($target->resistance->energyType == $this->energyType->name) {
             $damage = $damage - $target->resistance->value;
-            echo "Attack has been reduced to $damage damage <br>";
-            echo "$this->name will do $damage damage to $target->name <br>";
+            echo "$this->name used " . $attack[0] . " - It's not very effective! ($damage) <br>";
         } else {
-            echo "no resistance stuff <br>";
             $damage = $damage;
-            echo "$this->name will do $damage damage to $target->name <br>";
         }
 
 
