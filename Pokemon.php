@@ -50,7 +50,7 @@ class Pokemon
     {
         $target->health -= $damage;
         if ($target->health <= 0) {
-            echo "$target->name fainted";
+            echo "$target->name fainted <br>";
         } else {
             echo "$target->name is left with $target->health hp <br>";
         }
