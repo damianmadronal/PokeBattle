@@ -7,6 +7,7 @@ spl_autoload_register(function ($class_name) {
 });
 class Pokemon
 {
+    static $population;
     public $name;
     public $energyType;
     public $hitpoints;
@@ -23,6 +24,8 @@ class Pokemon
         $this->attacks = $attacks;
         $this->weakness = $weakness;
         $this->resistance = $resistance;
+
+        self::$population++;
     }
 
     public function battleMove($target, $attack)
@@ -60,6 +63,11 @@ class Pokemon
         } else {
             echo "$target->name is left with $target->health hp <br>";
         }
+    }
+
+    static function getPopulation()
+    {
+        return self::$population;
     }
 
     public function getName()
