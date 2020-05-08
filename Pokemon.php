@@ -1,46 +1,52 @@
 <?php
 
+namespace Pokemon;
 
+spl_autoload_register(function ($class_name) {
+    include $class_name . '.php';
+});
 class Pokemon
 {
     public $name;
-    public $nickName;
     public $energyType;
     public $hitpoints;
-    public $health;
     public $attacks;
-    public $weaknessName;
+    public $weakness;
     public $resistance;
-    public $weaknessMultiplier;
-    public $resistanceValue;
 
-    public function __construct($name, $nickName, $energyType, $hitpoints, $attacks, $weaknessName, $weaknessMultiplier, $resistance, $resistanceValue)
+    public function __construct($name, $energyType, $hitpoints, $attacks, $weakness, $resistance)
     {
         $this->name = $name;
-        $this->nickName = $nickName;
-        $this->energyType = new EnergyType($energyType);
+        $this->energyType = $energyType;
         $this->hitpoints = $hitpoints;
         $this->health = $hitpoints;
         $this->attacks = $attacks;
-        $this->weaknessName = new Weakness($weaknessName, $weaknessMultiplier);
-        $this->resistance = new Resistance($resistance, $resistanceValue);
+        $this->weakness = $weakness;
+        $this->resistance = $resistance;
     }
 
     public function battleMove($target, $attack)
     {
-        echo "<br><strong> $target->name total hp: $target->health</strong> <br><br>";
-        if ($target->weaknessName->energyType == $this->energyType->name) {
-            $damage = $attack[1] * $target->weaknessName->multiplier;
-            echo "$this->name used " . $attack[0] . " - It's very effective! ($damage) <br>";
+        $energyType = $this->getEnergyType()->getName();
+        $weaknessEnergyType = $target->getWeakness()->getEnergyType();
+        $multiplierEnergyType = $target->getWeakness()->getEnergyTypeValue();
+
+        $resistanceEnergyType = $target->getResistance()->getEnergyType();
+        $resistance = $target->getResistance()->getEnergyTypeValue();
+
+        echo "<br><strong>" . $target->getName() .  " total hp: " . $target->getHealth() . " <br><br>";
+        if ($weaknessEnergyType == $energyType) {
+            $damage = $attack->getAttackDamage() * $multiplierEnergyType;
+            echo $this->name . " used " .  $attack->getAttackName() . " - It's super effective! ($damage)<br>";
+        } elseif ($resistanceEnergyType == $energyType) {
+            $damage = $attack->getAttackDamage() - $resistance;
+            echo $this->name . " used " .  $attack->getAttackName() . " - It's not very effective ($damage)<br>";
         } else {
-            $damage = $attack[1];
+            $damage = $attack->getAttackDamage();
+            echo $this->name . " used " .  $attack->getAttackName() . " ($damage)<br>";
         }
-        if ($target->resistance->energyType == $this->energyType->name) {
-            $damage = $damage - $target->resistance->value;
-            echo "$this->name used " . $attack[0] . " - It's not very effective! ($damage) <br>";
-        } else {
-            $damage = $damage;
-        }
+
+        $this->decreaseHealth($damage, $target);
 
 
         $this->decreaseHealth($damage, $target);
@@ -54,5 +60,40 @@ class Pokemon
         } else {
             echo "$target->name is left with $target->health hp <br>";
         }
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getEnergyType()
+    {
+        return $this->energyType;
+    }
+
+    public function getHitpoints()
+    {
+        return $this->hitpoints;
+    }
+
+    public function getAttack()
+    {
+        return $this->attacks;
+    }
+
+    public function getWeakness()
+    {
+        return $this->weakness;
+    }
+
+    public function getResistance()
+    {
+        return $this->resistance;
+    }
+
+    public function getHealth()
+    {
+        return $this->health;
     }
 }
