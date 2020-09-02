@@ -33,7 +33,6 @@ class Pokemon
         $energyType = $this->getEnergyType()->getName();
         $weaknessEnergyType = $target->getWeakness()->getEnergyType();
         $multiplierEnergyType = $target->getWeakness()->getEnergyTypeValue();
-
         $resistanceEnergyType = $target->getResistance()->getEnergyType();
         $resistance = $target->getResistance()->getEnergyTypeValue();
 
@@ -50,56 +49,78 @@ class Pokemon
         }
 
         $this->decreaseHealth($damage, $target);
-
-
-        $this->decreaseHealth($damage, $target);
     }
 
     public function decreaseHealth($damage, $target)
     {
         $target->health -= $damage;
-        if ($target->health <= 0) {
-            echo "$target->name fainted <br>";
+        if ($target->getHealth() <= 0) {
+            echo $target->getName() . " fainted <br>";
+            self::$population--;
         } else {
-            echo "$target->name is left with $target->health hp <br>";
+            echo $target->getName() . " is left with " . $target->getHealth() . " hp <br>";
         }
     }
 
+    /**
+     * Get the value of population
+     */
     static function getPopulation()
     {
         return self::$population;
     }
 
+    /**
+     * Get the value of name
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Get the value of energyType
+     */
     public function getEnergyType()
     {
         return $this->energyType;
     }
 
+    /**
+     * Get the value of hitpoints
+     */
     public function getHitpoints()
     {
         return $this->hitpoints;
     }
 
-    public function getAttack()
+    /**
+     * Get the value of attacks
+     */
+    public function getAttacks()
     {
         return $this->attacks;
     }
 
+    /**
+     * Get the value of weakness
+     */
     public function getWeakness()
     {
         return $this->weakness;
     }
 
+    /**
+     * Get the value of resistance
+     */
     public function getResistance()
     {
         return $this->resistance;
     }
 
+    /**
+     * Get the value of health
+     */
     public function getHealth()
     {
         return $this->health;
