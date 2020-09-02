@@ -11,16 +11,6 @@ class Attack
         $this->damage = $damage;
     }
 
-    public function multiplyDamage($multiplier)
-    {
-        $this->damage = $this->damage * $multiplier;
-    }
-
-    public function reduceDamage($resistance)
-    {
-        $this->damage = $this->damage - $resistance;
-    }
-
     public function getAttackName()
     {
         return $this->name;
