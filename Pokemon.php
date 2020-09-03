@@ -7,13 +7,13 @@ spl_autoload_register(function ($class_name) {
 });
 class Pokemon
 {
-    static $population;
-    public $name;
-    public $energyType;
-    public $hitpoints;
-    public $attacks;
-    public $weakness;
-    public $resistance;
+    private static $population;
+    private $name;
+    private $energyType;
+    private $hitpoints;
+    private $attacks;
+    private $weakness;
+    private $resistance;
 
     public function __construct($name, $energyType, $hitpoints, $attacks, $weakness, $resistance)
     {

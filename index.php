@@ -10,7 +10,7 @@ use Pokemon\Pokemon;
 $pikachu = new Pikachu('Pikachu');
 $charmeleon = new Charmeleon('Charmeleon');
 
-$pikachu->battleMove($charmeleon, $pikachu->attacks['Electric Ring']);
-$charmeleon->battleMove($pikachu, $charmeleon->attacks['Flare']);
+$pikachu->battleMove($charmeleon, $pikachu->getAttacks()['Electric Ring']);
+$charmeleon->battleMove($pikachu, $charmeleon->getAttacks()['Flare']);
 
 echo '<br> Total: ' . Pokemon::getPopulation() . ' pokemons alive';

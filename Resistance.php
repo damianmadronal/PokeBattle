@@ -3,8 +3,8 @@
 
 class Resistance
 {
-    public $energyType;
-    public $value;
+    private $energyType;
+    private $value;
 
     public function __construct($energyType, $value)
     {

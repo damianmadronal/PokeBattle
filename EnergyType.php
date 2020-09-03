@@ -2,7 +2,7 @@
 
 class EnergyType
 {
-    public $name;
+    private $name;
 
     public function __construct($name)
     {

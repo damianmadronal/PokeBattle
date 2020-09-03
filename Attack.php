@@ -2,8 +2,8 @@
 
 class Attack
 {
-    public $name;
-    public $damage;
+    private $name;
+    private $damage;
 
     public function __construct($name, $damage)
     {
